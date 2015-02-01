@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+</p>
+
+<p>
+  <strong>Estimated finish:</strong>
+  <%= @project.estimated_finish %>
+</p>
+
+<p>
+  <strong>Completed at:</strong>
+  <%= @project.completed_at %>
+</p>
+
+<p>
+  <strong>Archived:</strong>
+  <%= @project.archived %>
+</p>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>

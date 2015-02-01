@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @job.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @job.description %>
+</p>
+
+<p>
+  <strong>Confirmed at:</strong>
+  <%= @job.confirmed_at %>
+</p>
+
+<p>
+  <strong>Progress:</strong>
+  <%= @job.progress %>
+</p>
+
+<p>
+  <strong>Estimated time:</strong>
+  <%= @job.estimated_time %>
+</p>
+
+<p>
+  <strong>Estimated price:</strong>
+  <%= @job.estimated_price %>
+</p>
+
+<p>
+  <strong>Real price:</strong>
+  <%= @job.real_price %>
+</p>
+
+<p>
+  <strong>Completed at:</strong>
+  <%= @job.completed_at %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @job.project %>
+</p>
+
+<%= link_to 'Edit', edit_job_path(@job) %> |
+<%= link_to 'Back', jobs_path %>

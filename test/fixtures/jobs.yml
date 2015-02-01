@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  confirmed_at: 2015-01-31 19:37:53
+  progress: 1
+  estimated_time: 1
+  estimated_price: 9.99
+  real_price: 9.99
+  completed_at: 2015-01-31 19:37:53
+  project_id: 
+
+two:
+  name: MyString
+  description: MyText
+  confirmed_at: 2015-01-31 19:37:53
+  progress: 1
+  estimated_time: 1
+  estimated_price: 9.99
+  real_price: 9.99
+  completed_at: 2015-01-31 19:37:53
+  project_id: 
