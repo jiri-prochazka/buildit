@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  resources :addresses
+
+  resources :customers
+
+  resources :employees
+
+  devise_for :users
   resources :attachments
 
   resources :requirements
