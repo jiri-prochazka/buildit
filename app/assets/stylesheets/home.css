@@ -1,0 +1,29 @@
+.intro-header {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  text-align: center;
+  color: #f8f8f8;
+  background: url(bg.jpg) no-repeat center center;
+  background-size: cover;
+  margin-top: -20px;
+}
+.jumbotron {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+.jumbotron > h1 {
+  color: #333;
+  text-shadow: 4px 4px 6px rgba(0,0,0,0.6);
+  font-size: 5em;
+  font-weight: 400;
+}
+.jumbotron > p {
+  color: #333;
+  text-shadow: 4px 4px 6px rgba(0,0,0,0.6);
+}
+
+h1.bold-style {
+  color: #333;
+  text-shadow: 4px 4px 6px rgba(0,0,0,0.6);
+  font-size: 3em;
+  font-weight: 400;
+}

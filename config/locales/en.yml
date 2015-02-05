@@ -26,3 +26,7 @@ en:
    concepts: "Concepts"
    about: "About"
    login: "Login"
+   addresses: "Addresses"
+  home:
+   welcome: "Welcome!"
+   welcome_text: "Welcome to site where your ideas can become true! To mek it happend, please login or register a new account for free!"
