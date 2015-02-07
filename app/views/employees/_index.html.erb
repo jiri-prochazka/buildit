@@ -1,8 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Employees</h1>
-
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Name</th>
@@ -26,14 +22,10 @@
         <td><%= employee.employed_since %></td>
         <td><%= employee.admin %></td>
         <td><%= employee.position %></td>
-        <td><%= link_to 'Show', employee %></td>
+        <td><%= change_type(employee) %></td>
         <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
         <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Employee', new_employee_path %>

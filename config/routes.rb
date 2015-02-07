@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'users/index'
+
   get 'home/index'
 
   resources :addresses
@@ -12,6 +14,9 @@ Rails.application.routes.draw do
   end
   resources :users do
     resources :addresses
+    member do
+      put :change_type
+    end
   end
   resources :attachments
 

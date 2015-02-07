@@ -1,0 +1,24 @@
+<div class="form-group">
+  <%= b.label :street, class: "col-md-offset-2 col-md-2 control-label" %>
+  <div class="col-md-6">
+    <%= b.text_field :street, placeholder: "", class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= b.label :city, class: "col-md-offset-2 col-md-2 control-label" %>
+  <div class="col-md-6">
+    <%= b.text_field :city, placeholder: "", class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= b.label :zip, class: "col-md-offset-2 col-md-2 control-label" %>
+  <div class="col-md-6">
+    <%= b.number_field :zip, placeholder: "", class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= b.label :country, class: "col-md-offset-2 col-md-2 control-label" %>
+  <div class="col-md-6">
+    <%= b.country_select :country, { priority_countries: ["CZ", "SK", "DE", "GB", "AT"], selected: "CZ" }, { class: 'form-control'} %>
+  </div>
+</div>

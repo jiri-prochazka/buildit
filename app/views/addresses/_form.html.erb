@@ -14,31 +14,7 @@
           </div>
         <% end %>
 
-        <div class="form-group">
-          <%= f.label :street, class: "col-md-offset-2 col-md-2 control-label" %>
-          <div class="col-md-6">
-            <%= f.text_field :street, autofocus: true, placeholder: "", class: "form-control" %>
-          </div>
-        </div>
-        <div class="form-group">
-          <%= f.label :city, class: "col-md-offset-2 col-md-2 control-label" %>
-          <div class="col-md-6">
-            <%= f.text_field :city, placeholder: "", class: "form-control" %>
-          </div>
-        </div>
-        <div class="form-group">
-          <%= f.label :zip, class: "col-md-offset-2 col-md-2 control-label" %>
-          <div class="col-md-6">
-            <%= f.number_field :zip, placeholder: "", class: "form-control" %>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :country, class: "col-md-offset-2 col-md-2 control-label" %>
-          <div class="col-md-6">
-            <%= f.country_select :country, { priority_countries: ["CZ", "SK", "DE", "GB", "AT"], selected: "CZ" }, { class: 'form-control'} %>
-          </div>
-        </div>
+        <%= render :partial => "addresses/form_fields", locals: {b: f} %>
 
         <div class="form-group">
           <div class="col-md-offset-4 col-md-5">

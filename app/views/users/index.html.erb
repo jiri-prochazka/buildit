@@ -1,0 +1,28 @@
+<h1>Users</h1>
+<hr/>
+<%= link_to 'New Customer', new_customer_path, class: "btn btn-primary" %>
+<%= link_to 'New Employee', new_employee_path, class: "btn btn-success" %>
+<hr/>
+<div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">All (<%= @users.all.count  %>)</a></li>
+    <li role="presentation"><a href="#customers" aria-controls="customers" role="tab" data-toggle="tab">Customers (<%= @customers.all.count  %>)</a></li>
+    <li role="presentation"><a href="#employees" aria-controls="employees" role="tab" data-toggle="tab">Employees (<%= @employees.all.count  %>)</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="all">
+    	<%= render :partial => "users/index" %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="customers">
+    	<%= render :partial => "customers/index" %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="employees">
+    	<%= render :partial => "employees/index" %>
+    </div>
+  </div>
+
+</div>
