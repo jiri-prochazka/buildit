@@ -1,15 +1,11 @@
 class ConceptsController < ApplicationController
-  before_action :set_concept, only: [:show, :edit, :update, :destroy]
+  before_action :set_concept, only: [:show, :edit, :update, :destroy, :archive]
 
   # GET /concepts
   # GET /concepts.json
   def index
     @concepts = Concept.all
-  end
-
-  # GET /concepts/1
-  # GET /concepts/1.json
-  def show
+    @concept = Concept.new
   end
 
   # GET /concepts/new
@@ -19,16 +15,18 @@ class ConceptsController < ApplicationController
 
   # GET /concepts/1/edit
   def edit
+
+    respond_to :js 
   end
 
   # POST /concepts
   # POST /concepts.json
   def create
     @concept = Concept.new(concept_params)
-
+    @concept.user = current_user
     respond_to do |format|
       if @concept.save
-        format.html { redirect_to @concept, notice: 'Concept was successfully created.' }
+        format.html { redirect_to concepts_url, notice: 'Concept was successfully created.' }
         format.json { render :show, status: :created, location: @concept }
       else
         format.html { render :new }
@@ -42,7 +40,7 @@ class ConceptsController < ApplicationController
   def update
     respond_to do |format|
       if @concept.update(concept_params)
-        format.html { redirect_to @concept, notice: 'Concept was successfully updated.' }
+        format.html { redirect_to concepts_url, notice: 'Concept was successfully updated.' }
         format.json { render :show, status: :ok, location: @concept }
       else
         format.html { render :edit }
@@ -59,6 +57,12 @@ class ConceptsController < ApplicationController
       format.html { redirect_to concepts_url, notice: 'Concept was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def archive
+    @concept.archived = !@concept.archived
+    @concept.save
+    redirect_to :back
   end
 
   private

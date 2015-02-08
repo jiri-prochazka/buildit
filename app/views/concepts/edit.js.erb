@@ -1,0 +1,2 @@
+$("#modal_edit_form").replaceWith("<div id='modal_edit_form' class='modal fade' tabindex='-1' role='dialog' aria-hidden='true'><%= escape_javascript( render :partial => 'concepts/modal_form', locals: {concept: @concept}) %></div>");
+$("#modal_edit_form").modal('show');

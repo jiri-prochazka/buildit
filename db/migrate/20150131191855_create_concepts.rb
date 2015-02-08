@@ -6,6 +6,7 @@ class CreateConcepts < ActiveRecord::Migration
       t.datetime :start_at
       t.datetime :end_at
       t.text :description
+      t.boolean :archived, default: false
 
       t.timestamps null: false
     end

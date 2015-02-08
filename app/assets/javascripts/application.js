@@ -14,3 +14,18 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require cocoon
+
+
+
+var init_datepicker = function(){
+	$('.datepicker').datepicker({
+    	format: "dd.mm.yyyy",
+    	weekStart: 1,
+    	autoclose: 'true'
+    });
+}
+
+$(document).ready(init_datepicker);
+$(document).on('page:load', init_datepicker);
+$(document).ajaxComplete( init_datepicker);

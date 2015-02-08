@@ -1,35 +1,52 @@
-<p id="notice"><%= notice %></p>
+<h1>Concepts</h1>
 
-<h1>Listing Concepts</h1>
+<div class="row">
+  <div class="col-xs-12 col-md-6 col-md-offset-3">
+    <div class="box">
+      <div class="box-icon">
+        <span class="fa fa-4x fa-pencil-square-o"></span>
+      </div>
+      <div class="info">
+        <h4 class="text-center">Start your project!</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti atque, tenetur quam aspernatur corporis at explicabo nulla dolore necessitatibus doloremque exercitationem sequi dolorem architecto perferendis quas aperiam debitis dolor soluta!</p>
+        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal_form">New Concept</button>
+        <br/>
+      </div>
+    </div>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Start at</th>
-      <th>End at</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @concepts.each do |concept| %>
-      <tr>
-        <td><%= concept.name %></td>
-        <td><%= concept.price %></td>
-        <td><%= concept.start_at %></td>
-        <td><%= concept.end_at %></td>
-        <td><%= concept.description %></td>
-        <td><%= link_to 'Show', concept %></td>
-        <td><%= link_to 'Edit', edit_concept_path(concept) %></td>
-        <td><%= link_to 'Destroy', concept, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+</div>
+<br/>
+
+<div class="row">
+  <% @concepts.each do |concept| %>  
+  <div class="col-xs-12 col-md-6 ">
+    <div class="panel <%= concept.archived ? 'panel-default' : 'panel-success'  %>">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong><%= concept.name %>  <%= concept_badge(concept) %></strong></h3>
+      </div>
+      <div class="panel-body">
+        <p><%= concept.description %></p>
+        <p><strong>Price: </strong><%= concept.price %></p>
+        <p><strong>Start at: </strong><%= concept.start_at.strftime("%d.%m.%Y") %></p>
+        <p><strong>End at: </strong><%= concept.end_at.strftime("%d.%m.%Y") %></p>
+        <%= link_to 'Edit', edit_concept_path(concept), remote: true, class: "btn btn-primary btn-sm" %>
+        <%= link_to (concept.archived ? 'Activate' : 'Archive'), archive_concept_path(concept), class: "btn btn-warning btn-sm", method: :put %>
+        <%= link_to_new_or_existing(concept) %>
+      </div>
+
+    </div>
+  </div>
+
+  <% end %>
+
+</div>
+<div id="modal_form" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <%= render :partial => "concepts/modal_form", locals: {concept: @concept}%>
+</div>
+
+<div id="modal_edit_form">
+</div>
 
 <br>
-
-<%= link_to 'New Concept', new_concept_path %>

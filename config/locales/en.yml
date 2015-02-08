@@ -20,6 +20,11 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  date:
+    formats:
+      default: "%d.%m.%Y"
+      short: "%b %d"
+      long: "%B %d, %Y"
   navbar:
    home: "Home"
    projects: "Projects"

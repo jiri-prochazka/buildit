@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20150201195300) do
     t.datetime "start_at"
     t.datetime "end_at"
     t.text     "description"
+    t.boolean  "archived"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "user_id"

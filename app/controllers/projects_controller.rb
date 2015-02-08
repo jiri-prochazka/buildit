@@ -15,17 +15,21 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    @concept = Concept.find(params[:concept_id])
   end
 
   # GET /projects/1/edit
   def edit
+    @concept = @project.concept
   end
 
   # POST /projects
   # POST /projects.json
   def create
     @project = Project.new(project_params)
-
+    @concept = Concept.find(params[:concept_id])
+    @project.concept = @concept
+    @project.employee = current_user
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
@@ -40,6 +44,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
+    @concept = @project.concept
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
@@ -69,6 +74,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :estimated_finish, :completed_at, :archived)
+      params.require(:project).permit(:name, :estimated_finish, :completed_at, :archived, jobs_attributes: [:id, :_destroy, :name, :description, :confirmed_at, :progress, :estimated_time, :estimated_price, :real_price, :completed_at])
     end
 end

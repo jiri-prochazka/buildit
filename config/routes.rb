@@ -22,7 +22,12 @@ Rails.application.routes.draw do
 
   resources :requirements
 
-  resources :concepts
+  resources :concepts do
+    resources :projects
+    member do
+      put :archive
+    end
+  end
 
   resources :jobs
 
