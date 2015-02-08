@@ -1,6 +1,5 @@
 <div class="nested-fields">
   <article class="timeline-entry">
-
     <div class="timeline-entry-inner">
 
       <div class="timeline-icon bg-info">
@@ -40,8 +39,33 @@
           </div>
         </div>
 
+        <% unless f.object.attachments.empty? %>
+        <div class="form-group">
+          <label class="col-md-offset-2 col-md-2 control-label">Files</label>
+          <div class="col-md-6">
+            <% f.object.attachments.each do |a| %>
+            <div id="attachment_<%= a.id %>">
+              <%= link_to a.label, a.file.url %> <%= link_to '<i class="fa fa-trash"></i>'.html_safe, a, method: :delete, data: {confirm: "Are you sure?"}, remote: true %><br/>
+            </div>
+            <% end %>
+          </div>
+        </div>
+        <% end %>
+
+        <%= f.fields_for :attachments, Attachment.new, html: {multipart: true} do |a| %>
         
-        <%= link_to_remove_association "Remove", f, class: "btn btn-danger btn-sm pull-right"  %>
+        <%= render :partial => "attachments/attachment_fields", locals: {f: a} %>
+
+        <div id="files" class="form-group">
+
+          <div class="col-md-6 col-md-offset-4">
+            <%= link_to_add_association 'Add more files', f, :attachments, { partial: "attachments/attachment_fields", 'data-association-insertion-method' => 'before', 'data-association-insertion-node' => '#files', class: "btn btn-success btn-sm"} %>
+          </div>
+        </div>
+        <% end %>
+
+        <br/>
+        <%= link_to_remove_association "Remove job", f, class: "btn btn-danger btn-sm pull-right"  %>
         <br/>
       </div>
     </div>

@@ -56,8 +56,7 @@ class AttachmentsController < ApplicationController
   def destroy
     @attachment.destroy
     respond_to do |format|
-      format.html { redirect_to attachments_url, notice: 'Attachment was successfully destroyed.' }
-      format.json { head :no_content }
+      format.js { render :destroy }
     end
   end
 

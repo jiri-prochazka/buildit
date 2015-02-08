@@ -1,0 +1,15 @@
+<div class="file-part">
+	<div class="form-group form-group-sm">
+	  <%= f.label :name, class: "col-md-offset-2 col-md-2 control-label" %>
+	  <div class="row">
+	    <div class="col-md-3">
+	      <%= f.text_field :name, placeholder: "", class: "form-control" %>
+	    </div>
+	    <div class="col-md-3">
+	      <%= f.file_field :file, placeholder: "", class: "" %>
+	    </div>
+
+	    <%= link_to_remove_association "Remove file", f, { wrapper_class: 'file-part', class: "btn btn-warning btn-sm " } %>
+	  </div>
+	</div>
+</div>

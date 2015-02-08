@@ -16,8 +16,6 @@
 //= require_tree .
 //= require cocoon
 
-
-
 var init_datepicker = function(){
 	$('.datepicker').datepicker({
 		format: "dd.mm.yyyy",
@@ -32,10 +30,20 @@ var init_datepicker = function(){
 		max: 100,
 		step: 10
 	});
-
-
 }
+
 
 $(document).ready(init_datepicker);
 $(document).on('page:load', init_datepicker);
 $(document).ajaxComplete( init_datepicker);
+
+$(document).on('cocoon:after-insert', function(e, insertedItem) {
+    $(".progress").slider({
+		ticks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+		ticks_labels: ["0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"],
+		ticks_snap_bounds: 30,
+		max: 100,
+		step: 10,
+		value: 0
+	});
+});
