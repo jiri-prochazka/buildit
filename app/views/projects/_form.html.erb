@@ -40,9 +40,11 @@
       <div class="form-group">
         <%= f.label :estimated_finish, class: "col-md-offset-2 col-md-2 control-label" %>
         <div class="col-md-6">
-          <%= f.text_field :estimated_finish, placeholder: "", class: "form-control datepicker" %>
+          <%= f.text_field :estimated_finish, :value => (f.object.estimated_finish.strftime('%d.%m.%Y') if f.object.estimated_finish), placeholder: "", class: "form-control datepicker" %>
         </div>
       </div>
+
+      <h2>Jobs</h2>
 
       <div class="col-md-11">
         <div class="timeline-centered">
@@ -60,7 +62,7 @@
               </div>
 
               <div class="timeline-label">
-                <%= link_to_add_association 'add job', f, :jobs, partial: "jobs/form_fields", 'data-association-insertion-method' => 'before', 'data-association-insertion-node' => 'article.begin', id: 'add-nested-fields', class: "btn btn-success btn-block" %>
+                <%= link_to_add_association 'Add job', f, :jobs, partial: "jobs/form_fields", 'data-association-insertion-method' => 'before', 'data-association-insertion-node' => 'article.begin', id: 'add-nested-fields', class: "btn btn-success btn-block" %>
               </div>
             </div>
           </article>
@@ -68,7 +70,7 @@
       </div>
 
       <div class="form-group">
-        <div class="col-md-offset-4 col-md-5">
+        <div class="col-md-offset-5 col-md-6 col-xs-12">
           <%= f.submit "Save", class: "btn btn-primary" %>
           <%= link_to("Cancel", :back , class: "btn btn-warning") %>
         </div>
