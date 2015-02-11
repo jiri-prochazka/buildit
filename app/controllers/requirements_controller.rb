@@ -24,7 +24,8 @@ class RequirementsController < ApplicationController
   # POST /requirements
   # POST /requirements.json
   def create
-    @requirement = Requirement.new(requirement_params)
+    @project = Project.find(params[:project_id])
+    @requirement = @project.requirements.build(requirement_params)
 
     respond_to do |format|
       if @requirement.save

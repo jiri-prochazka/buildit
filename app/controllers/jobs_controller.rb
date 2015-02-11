@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: [:show, :edit, :update, :destroy]
+  before_action :set_job, only: [:show, :edit, :update, :destroy, :approve]
 
   # GET /jobs
   # GET /jobs.json
@@ -59,6 +59,12 @@ class JobsController < ApplicationController
       format.html { redirect_to jobs_url, notice: 'Job was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def approve
+    @job.confirmed_at = DateTime.now
+    @job.save
+    redirect_to :back
   end
 
   private

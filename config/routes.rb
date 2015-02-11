@@ -29,9 +29,15 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :jobs
+  resources :jobs do
+    member do
+      put :approve
+    end
+  end
 
-  resources :projects
+  resources :projects do
+    resources :requirements
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

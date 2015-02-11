@@ -30,6 +30,10 @@ var init_datepicker = function(){
 		max: 100,
 		step: 10
 	});
+
+	$("div.panel-heading.toggle").click(function(){
+		$(this).siblings(".panel-body").slideToggle();
+	});
 }
 
 

@@ -1,0 +1,20 @@
+<h2>Requirements</h2>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<% @requirements.each_with_index do |requirement, index| %>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= index.to_s %>" aria-expanded="true" aria-controls="collapseOne">
+          Requirement #<%= (index + 1).to_s %>
+        </a>
+      </h4>
+    </div>
+    <div id="collapse<%= index.to_s %>" class="panel-collapse collapse <%= (index == @requirements.size - 1) ? 'in' : ''  %>" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        <p><%= requirement.content  %></p>
+        <em><%= requirement.created_at.strftime("%d.%m.%Y %T") %></em>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>

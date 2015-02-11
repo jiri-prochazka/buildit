@@ -10,6 +10,9 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @concept = @project.concept
+    @requirements = @project.requirements.to_a
+    @requirement = @project.requirements.build
   end
 
   # GET /projects/new
