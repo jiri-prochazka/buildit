@@ -1,10 +1,16 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :archive]
 
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    if params[:cat].eql?('completed')
+      @projects = Project.where.not(completed_at: nil)
+    elsif params[:cat].eql?('archived')
+      @projects = Project.where(archived: true)
+    else
+      @projects = Project.where(completed_at: nil, archived: false)
+    end
   end
 
   # GET /projects/1
@@ -17,8 +23,12 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
-    @project = Project.new
-    @concept = Concept.find(params[:concept_id])
+    unless params[:concept_id].blank?
+      @project = Project.new
+      @concept = Concept.find(params[:concept_id])
+    else
+      redirect_to concepts_path, alert: "Can't create project without a concept"
+    end
   end
 
   # GET /projects/1/edit
@@ -67,6 +77,12 @@ class ProjectsController < ApplicationController
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def archive
+    @project.archived = !@project.archived
+    @project.save
+    redirect_to :back
   end
 
   private

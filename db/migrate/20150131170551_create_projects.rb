@@ -4,7 +4,7 @@ class CreateProjects < ActiveRecord::Migration
       t.string :name
       t.datetime :estimated_finish
       t.datetime :completed_at
-      t.boolean :archived
+      t.boolean :archived, default: false
 
       t.timestamps null: false
     end

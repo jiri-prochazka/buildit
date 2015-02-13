@@ -29,7 +29,7 @@ class RequirementsController < ApplicationController
 
     respond_to do |format|
       if @requirement.save
-        format.html { redirect_to @requirement, notice: 'Requirement was successfully created.' }
+        format.html { redirect_to :back, notice: 'Requirement was successfully created.' }
         format.json { render :show, status: :created, location: @requirement }
       else
         format.html { render :new }
