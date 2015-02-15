@@ -13,7 +13,9 @@
         <hr/>
       </div>
       <%= link_to "Details", project_path(project), class: "btn btn-success btn-sm" %>
-      <%= link_to 'Edit', edit_project_path(project), remote: true, class: "btn btn-primary btn-sm" %>
+      <% if can? :update, Project %>
+        <%= link_to 'Edit', edit_project_path(project), remote: true, class: "btn btn-primary btn-sm" %>
+      <% end %>
       <%= link_to (project.archived ? 'Activate' : 'Archive'), archive_project_path(project), class: "btn btn-warning btn-sm", method: :put %>
     </div>
   </div>

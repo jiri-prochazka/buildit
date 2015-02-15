@@ -7,8 +7,9 @@ class Project < ActiveRecord::Base
 
 	validates :name, presence: true
 	validate :check_concept_for_project, on: :create
+	before_create :set_customer, if: Proc.new { |project| project.customer_id.nil? }
 
-	before_save :set_completed_at, if: Proc.new { |project| project.completed? }
+	after_save :set_completed_at, if: Proc.new { |project| project.completed_at.nil? }
 
 	accepts_nested_attributes_for :jobs, :reject_if => :all_blank, :allow_destroy => true
 
@@ -25,12 +26,7 @@ class Project < ActiveRecord::Base
 	end
 
 	def completed?
-		self.progress == 100
-	end
-
-	def self.users_projects(user)
-
-		
+		self.jobs.map(&:completed?).all?
 	end
 
 	private
@@ -42,6 +38,13 @@ class Project < ActiveRecord::Base
 	end
 
 	def set_completed_at
-		self.completed_at = DateTime.now
+		if self.completed?
+			self.completed_at = DateTime.now
+			self.save
+		end
+	end
+
+	def set_customer
+		self.customer = self.concept.user
 	end
 end

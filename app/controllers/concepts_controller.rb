@@ -1,10 +1,11 @@
 class ConceptsController < ApplicationController
   before_action :set_concept, only: [:show, :edit, :update, :destroy, :archive]
+  load_and_authorize_resource
 
   # GET /concepts
   # GET /concepts.json
   def index
-    @concepts = Concept.all
+    #@concepts = @concept.paginate
     @concept = Concept.new
   end
 

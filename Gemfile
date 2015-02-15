@@ -16,6 +16,8 @@ gem 'coffee-rails', '~> 4.1.0'
 
 #Devise gem for authentication
 gem 'devise'
+#Cancancan for authorization, ACL
+gem 'cancancan', '~> 1.10'
 
 gem 'country_select', github: 'stefanpenner/country_select'
 

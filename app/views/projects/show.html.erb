@@ -6,9 +6,8 @@
 		<div class="panel-body">
 			<p><%= @concept.description %></p>
 			<p><strong>Price: </strong><%= @concept.price %></p>
-			<p><strong>Start at: </strong><%= @concept.start_at.strftime("%d.%m.%Y") %></p>
-			<p><strong>End at: </strong><%= @concept.end_at.strftime("%d.%m.%Y") %></p>
-
+			<p><strong>Start at: </strong><%= @concept.start_at.strftime("%d.%m.%Y") if @concept.start_at %></p>
+      		<p><strong>End at: </strong><%= @concept.end_at.strftime("%d.%m.%Y") if @concept.end_at %></p>
 		</div>
 
 	</div>
@@ -18,8 +17,12 @@
 	<div class="panel panel-info">
 		<div class="panel-heading"><h3 class="panel-title"><strong>Project </strong></h3></div>
 		<div class="panel-body">
-			<button id="req-modal" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modal_form">Add Requirement</button>
-			<%= link_to("Edit", edit_project_path(@project) , class: "btn btn-success pull-right") %>
+			<% if can? :create, Requirement %>
+				<button id="req-modal" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modal_form">Add Requirement</button>
+			<% end %>
+			<% if can? :update, Project %>
+				<%= link_to("Edit", edit_project_path(@project) , class: "btn btn-success pull-right") %>
+			<% end %>
 			<h2><strong><%= @project.name %></strong></h2>
 			<p><strong>Estimated finish: </strong><%= @project.estimated_finish.strftime('%d.%m.%Y') %></p>
 			<p><strong>Estimated price: </strong><%= @project.estimated_price %></p>
@@ -41,8 +44,10 @@
 							</div>
 
 							<div class="timeline-label">
-								<% if job.confirmed_at.nil? %>
-									<%= link_to("Approve", approve_job_path(job) , method: :put, class: "btn btn-success btn-sm pull-right") %>
+								<% if can? :approve, Job %>
+									<% if job.confirmed_at.nil? %>
+										<%= link_to("Approve", approve_job_path(job) , method: :put, class: "btn btn-success btn-sm pull-right") %>
+									<% end %>
 								<% end %>
 								<h3><strong><%= job.name %></strong> 
 									<% if job.confirmed_at.nil? %>

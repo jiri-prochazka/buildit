@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  load_and_authorize_resource
   def index
   	@customers = Customer.all
   	@employees = Employee.all

@@ -1,6 +1,6 @@
 class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
   # GET /employees/new
   def new
     @employee = Employee.new
@@ -59,6 +59,6 @@ class EmployeesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def employee_params
-      params.require(:employee).permit(:name, :surname, :phone, :email, :employed_since, :admin, :position, :password, addresses_attributes: [:street,:city,:zip,:country])
+      params.require(:employee).permit(:name, :surname, :phone, :email, :employed_since, :admin, :position, :password, :role, addresses_attributes: [:street,:city,:zip,:country])
     end
 end

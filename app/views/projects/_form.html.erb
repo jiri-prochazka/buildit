@@ -6,8 +6,8 @@
     <div class="panel-body">
       <p><%= @concept.description %></p>
       <p><strong>Price: </strong><%= @concept.price %></p>
-      <p><strong>Start at: </strong><%= @concept.start_at.strftime("%d.%m.%Y") %></p>
-      <p><strong>End at: </strong><%= @concept.end_at.strftime("%d.%m.%Y") %></p>
+      <p><strong>Start at: </strong><%= @concept.start_at.strftime("%d.%m.%Y") if @concept.start_at %></p>
+      <p><strong>End at: </strong><%= @concept.end_at.strftime("%d.%m.%Y") if @concept.end_at %></p>
 
     </div>
 
@@ -41,6 +41,13 @@
         <%= f.label :estimated_finish, class: "col-md-offset-2 col-md-2 control-label" %>
         <div class="col-md-6">
           <%= f.text_field :estimated_finish, :value => (f.object.estimated_finish.strftime('%d.%m.%Y') if f.object.estimated_finish), placeholder: "", class: "form-control datepicker" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :customer, class: "col-md-offset-2 col-md-2 control-label" %>
+        <div class="col-md-6">
+          <%= f.collection_select(:customer_id, Customer.all, :id, :account_label, {selected: @concept.user_id}, {class: "form-control"}) %>
         </div>
       </div>
 

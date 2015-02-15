@@ -29,11 +29,15 @@
       <div class="panel-body">
         <p><%= concept.description %></p>
         <p><strong>Price: </strong><%= concept.price %></p>
-        <p><strong>Start at: </strong><%= concept.start_at.strftime("%d.%m.%Y") %></p>
-        <p><strong>End at: </strong><%= concept.end_at.strftime("%d.%m.%Y") %></p>
+        <p><strong>Start at: </strong><%= concept.start_at.strftime("%d.%m.%Y") if concept.start_at %></p>
+        <p><strong>End at: </strong><%= concept.end_at.strftime("%d.%m.%Y") if concept.end_at %></p>
         <%= link_to 'Edit', edit_concept_path(concept), remote: true, class: "btn btn-primary btn-sm" %>
         <%= link_to (concept.archived ? 'Activate' : 'Archive'), archive_concept_path(concept), class: "btn btn-warning btn-sm", method: :put %>
-        <%= link_to_new_or_existing(concept) %>
+        <% if can? :create, Project %>
+          <%= link_to_new_or_existing(concept) %>
+        <% else %>
+          <%= link_to("Show Project", project_path(concept.project) , class: "btn btn-sm btn-info") if concept.has_project? %>
+        <% end %>
       </div>
 
     </div>

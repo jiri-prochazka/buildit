@@ -11,6 +11,15 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :addresses
 
+  ROLES = %w[customer manager admin]
+  
+  def role?(base_role)
+    ROLES.index(base_role.to_s) <= ROLES.index(role) unless role.blank?
+  end
+
+  def self.roles
+    ROLES
+  end
 
   def account_label
   	name.to_s + ' ' + surname.to_s
@@ -20,6 +29,7 @@ class User < ActiveRecord::Base
 
   def set_as_customer
   	self.type = "Customer"
+    self.role = "customer"
   end
          
 end

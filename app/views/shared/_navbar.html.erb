@@ -14,8 +14,10 @@
         <li class="<%= 'active' if current_page?(root_path) %>"><a href="/"><%= t('navbar.home') %></a></li>
         <li class="<%= 'active' if current_page?(concepts_path) %>"><a href="/concepts"><%= t('navbar.concepts') %></a></li>
         <li class="<%= 'active' if current_page?(projects_path) %>"><a href="/projects"><%= t('navbar.projects') %></a></li>
-        <% if true %>
+        <% if can? :index, Address %>
           <li class="<%= 'active' if current_page?(addresses_path) %>"><a href="/addresses"><%= t('navbar.addresses') %></a></li>
+        <% end %>
+        <% if can? :manage, User %>
           <li class="<%= 'active' if current_page?(users_path) %>"><a href="/users"><%= t('navbar.users') %></a></li>
         <% end %>
 
