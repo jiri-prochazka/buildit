@@ -27,7 +27,7 @@ gem "cocoon"
 gem 'will_paginate', '~> 3.0.6'
 gem 'will_paginate-bootstrap'
 
-gem 'rails_12factor', group: :production
+gem 'rails_serve_static_assets', group: :production
 
 #paperclip for uploading files
 gem "paperclip", "~> 4.2"
