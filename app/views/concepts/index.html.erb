@@ -46,6 +46,9 @@
   <% end %>
 
 </div>
+
+<div class="row"><%= will_paginate @concepts, renderer: BootstrapPagination::Rails  %></div>
+
 <div id="modal_form" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <%= render :partial => "concepts/modal_form", locals: {concept: @concept}%>
 </div>

@@ -26,7 +26,8 @@ class RequirementsController < ApplicationController
   def create
     @project = Project.find(params[:project_id])
     @requirement = @project.requirements.build(requirement_params)
-
+    @requirement.customer = current_user
+    
     respond_to do |format|
       if @requirement.save
         format.html { redirect_to :back, notice: 'Requirement was successfully created.' }

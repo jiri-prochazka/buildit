@@ -24,6 +24,9 @@ gem 'country_select', github: 'stefanpenner/country_select'
 #nested forms
 gem "cocoon"
 
+gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate-bootstrap'
+
 #paperclip for uploading files
 gem "paperclip", "~> 4.2"
 
