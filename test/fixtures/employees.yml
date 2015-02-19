@@ -1,19 +1,4 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  surname: MyString
-  phone: MyString
-  email: MyString
-  employed_since: 2015-02-01 18:24:23
-  admin: false
-  position: MyString
 
-two:
-  name: MyString
-  surname: MyString
-  phone: MyString
-  email: MyString
-  employed_since: 2015-02-01 18:24:23
-  admin: false
-  position: MyString
+
