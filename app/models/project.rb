@@ -1,6 +1,6 @@
 class Project < ActiveRecord::Base
 	has_many :jobs, dependent: :destroy
-	has_many :requirements
+	has_many :requirements, dependent: :destroy
 	belongs_to :concept
 	belongs_to :employee
 	belongs_to :customer
@@ -45,6 +45,6 @@ class Project < ActiveRecord::Base
 	end
 
 	def set_customer
-		self.customer = self.concept.user
+		self.customer = self.concept.user if self.concept.user.is_a?(Customer)
 	end
 end

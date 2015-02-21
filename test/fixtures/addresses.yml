@@ -3,13 +3,13 @@
 one:
   street: MyString
   city: MyString
-  zip: 1
-  country: MyString
-  user_id: 
+  zip: 19000
+  country: CZ
+  user: customer1 
 
 two:
   street: MyString
   city: MyString
-  zip: 1
-  country: MyString
-  user_id: 
+  zip: 17000
+  country: UK
+  user: employee1 

@@ -16,6 +16,17 @@ customer1:
   type: Customer
   role: customer
 
+customer2:
+  name: Jim
+  surname: Good
+  phone: +420123123123
+  email: jim@teeee.com
+  salutation: Mr.
+  nationality: UK
+  newsletter: true
+  type: Customer
+  role: customer
+
 employee1:
   name: Jim
   surname: Canada
@@ -25,6 +36,7 @@ employee1:
   admin: false
   position: senior
   role: manager
+  type: Employee
 
 admin:
   name: admin

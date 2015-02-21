@@ -9,14 +9,8 @@ class ConceptsController < ApplicationController
     @concept = Concept.new
   end
 
-  # GET /concepts/new
-  def new
-    @concept = Concept.new
-  end
-
   # GET /concepts/1/edit
   def edit
-
     respond_to :js 
   end
 
@@ -30,7 +24,7 @@ class ConceptsController < ApplicationController
         format.html { redirect_to concepts_url, notice: 'Concept was successfully created.' }
         format.json { render :show, status: :created, location: @concept }
       else
-        format.html { render :new }
+        format.html { redirect_to concepts_url, alert: "Wrong input fields for concept" }
         format.json { render json: @concept.errors, status: :unprocessable_entity }
       end
     end
@@ -44,21 +38,12 @@ class ConceptsController < ApplicationController
         format.html { redirect_to concepts_url, notice: 'Concept was successfully updated.' }
         format.json { render :show, status: :ok, location: @concept }
       else
-        format.html { render :edit }
+        format.html { redirect_to concepts_url, alert: "Wrong input fields for concept" }
         format.json { render json: @concept.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /concepts/1
-  # DELETE /concepts/1.json
-  def destroy
-    @concept.destroy
-    respond_to do |format|
-      format.html { redirect_to concepts_url, notice: 'Concept was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
 
   def archive
     @concept.archived = !@concept.archived

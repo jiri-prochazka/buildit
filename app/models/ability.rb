@@ -22,6 +22,7 @@ class Ability
     end
     if user.role? :admin
       can :manage, :all
+      cannot :create, Requirement
     end
 
     # Define abilities for the passed in user here. For example:

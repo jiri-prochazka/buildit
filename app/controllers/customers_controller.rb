@@ -41,16 +41,6 @@ class CustomersController < ApplicationController
     end
   end
 
-  # DELETE /customers/1
-  # DELETE /customers/1.json
-  def destroy
-    @customer.destroy
-    respond_to do |format|
-      format.html { redirect_to users_path, notice: 'Customer was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_customer

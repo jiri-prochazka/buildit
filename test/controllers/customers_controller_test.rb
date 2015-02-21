@@ -2,13 +2,9 @@ require 'test_helper'
 
 class CustomersControllerTest < ActionController::TestCase
   setup do
-    @customer = customers(:one)
-  end
-
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:customers)
+    @customer = users(:customer1)
+    @user = users(:admin)
+    sign_in @user
   end
 
   test "should get new" do
@@ -18,15 +14,15 @@ class CustomersControllerTest < ActionController::TestCase
 
   test "should create customer" do
     assert_difference('Customer.count') do
-      post :create, customer: { email: @customer.email, name: @customer.name, nationality: @customer.nationality, newsletter: @customer.newsletter, phone: @customer.phone, salutation: @customer.salutation, surname: @customer.surname }
+      post :create, customer: { email: "blah@blue.eu", name: @customer.name, nationality: @customer.nationality, newsletter: @customer.newsletter, phone: @customer.phone, salutation: @customer.salutation, surname: @customer.surname }
     end
-
-    assert_redirected_to customer_path(assigns(:customer))
+    assert_redirected_to users_path
   end
 
-  test "should show customer" do
-    get :show, id: @customer
-    assert_response :success
+  test "should not create customer, not valid" do
+    assert_no_difference('Customer.count') do
+      post :create, customer: { email: "blah@blue.eu" }
+    end
   end
 
   test "should get edit" do
@@ -36,14 +32,42 @@ class CustomersControllerTest < ActionController::TestCase
 
   test "should update customer" do
     patch :update, id: @customer, customer: { email: @customer.email, name: @customer.name, nationality: @customer.nationality, newsletter: @customer.newsletter, phone: @customer.phone, salutation: @customer.salutation, surname: @customer.surname }
-    assert_redirected_to customer_path(assigns(:customer))
+    assert_redirected_to users_path
   end
 
-  test "should destroy customer" do
-    assert_difference('Customer.count', -1) do
-      delete :destroy, id: @customer
+  test "should not update customer, not valid" do
+    patch :update, id: @customer, customer: { email: nil, name: nil, nationality: @customer.nationality, newsletter: @customer.newsletter, phone: @customer.phone, salutation: @customer.salutation, surname: @customer.surname }
+    assert_response :success
+  end
+
+  test "should not get new" do
+    sign_in users(:employee1)
+    get :new
+    assert_response :redirect
+    assert_equal "You are not authorized to access this page.", flash[:alert]
+  end
+
+  test "should not create customer" do
+    sign_in users(:employee1)
+    assert_no_difference('Customer.count') do
+      post :create, customer: { email: "blahi@blue.eu", name: @customer.name, nationality: @customer.nationality, newsletter: @customer.newsletter, phone: @customer.phone, salutation: @customer.salutation, surname: @customer.surname }
     end
-
-    assert_redirected_to customers_path
+    assert_response :redirect
+    assert_equal "You are not authorized to access this page.", flash[:alert]
   end
+
+  test "should not get edit" do
+    sign_in users(:employee1)
+    get :edit, id: @customer
+    assert_response :redirect
+    assert_equal "You are not authorized to access this page.", flash[:alert]
+  end
+
+  test "should not update customer" do
+    sign_in users(:employee1)
+    patch :update, id: @customer, customer: { email: @customer.email, name: @customer.name, nationality: @customer.nationality, newsletter: @customer.newsletter, phone: @customer.phone, salutation: @customer.salutation, surname: @customer.surname }
+    assert_response :redirect
+    assert_equal "You are not authorized to access this page.", flash[:alert]
+  end
+
 end

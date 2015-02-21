@@ -22,7 +22,7 @@ class ConceptTest < ActiveSupport::TestCase
 
   test "has project" do
   	a = concepts(:one)
-  	b = concepts(:two)
+  	b = concepts(:four)
   	assert a.has_project?
   	assert !b.has_project?
   end

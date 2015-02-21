@@ -1,23 +1,29 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: Job 1
   description: MyText
   confirmed_at: 2015-01-31 19:37:53
-  progress: 1
-  estimated_time: 1
+  progress: 10
+  estimated_time: 10
   estimated_price: 9.99
   real_price: 9.99
-  completed_at: 2015-01-31 19:37:53
-  project_id: 
+  project: one 
 
 two:
-  name: MyString
+  name: Job 2
   description: MyText
-  confirmed_at: 2015-01-31 19:37:53
-  progress: 1
-  estimated_time: 1
-  estimated_price: 9.99
+  progress: 0
+  estimated_time: 12
+  estimated_price: 10
   real_price: 9.99
-  completed_at: 2015-01-31 19:37:53
-  project_id: 
+  project: one
+
+three:
+  name: Job 3
+  description: MyText
+  progress: 100
+  estimated_time: 12
+  estimated_price: 10
+  real_price: 9.99
+  project: three

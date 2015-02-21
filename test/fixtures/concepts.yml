@@ -9,7 +9,7 @@ one:
   archived: false
   created_at: "2015-02-15 16:54:30"
   updated_at: "2015-02-16 19:13:57"
-  user: one
+  user: customer2
 
 
 two:
@@ -21,5 +21,27 @@ two:
   archived: true
   created_at: "2015-02-15 16:54:30"
   updated_at: "2015-02-16 19:13:57"
-  user: one
+  user: customer1
+
+three:
+  name: "Lorem ipsum 3"
+  price: 700.00
+  start_at: "2015-02-03 00:00:00"
+  end_at: "2015-02-17 00:00:00"
+  description: "Lorem ipsum dolor sit amet consectetur adipisicin..."
+  archived: true
+  created_at: "2015-02-15 16:54:30"
+  updated_at: "2015-02-16 19:13:57"
+  user: employee1
+
+four:
+  name: "Lorem ipsum 4"
+  price: 700.00
+  start_at: "2015-02-03 00:00:00"
+  end_at: "2015-02-17 00:00:00"
+  description: "Lorem ipsum dolor sit amet consectetur adipisicin..."
+  archived: false
+  created_at: "2015-02-15 16:54:30"
+  updated_at: "2015-02-16 19:13:57"
+  user: customer2
 

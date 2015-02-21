@@ -2,8 +2,8 @@
 
 one:
   content: MyText
-  project_id: 
+  project: one
 
 two:
   content: MyText
-  project_id: 
+  project: two

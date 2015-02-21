@@ -7,11 +7,27 @@ one:
   created_at: "2015-02-17 17:31:09"
   updated_at: "2015-02-17 17:31:09"
   concept: one
-  customer: one
-  employee: one
+  customer: customer1
+  employee: employee1
 
 two:
-  name: MyString
-  estimated_finish: 2015-01-31 18:05:51
-  completed_at: 2015-01-31 18:05:51
+  name: "Lorem Ipsum project 2"
+  estimated_finish: "2015-06-30 00:00:00"
+  archived: true
+  created_at: "2015-02-17 17:31:09"
+  updated_at: "2015-02-17 17:31:09"
+  concept: two
+  customer: customer2
+  employee: employee1
+
+three:
+  name: "Lorem Ipsum project 3"
+  estimated_finish: "2015-06-30 00:00:00"
   archived: false
+  created_at: "2015-02-17 17:31:09"
+  updated_at: "2015-02-17 17:31:09"
+  completed_at: "2015-02-17 17:31:09"
+  concept: three
+  customer: customer2
+  employee: employee1
+

@@ -2,13 +2,9 @@ require 'test_helper'
 
 class EmployeesControllerTest < ActionController::TestCase
   setup do
-    @employee = employees(:one)
-  end
-
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:employees)
+    @employee = users(:employee1)
+    @user = users(:admin)
+    sign_in @user
   end
 
   test "should get new" do
@@ -18,15 +14,15 @@ class EmployeesControllerTest < ActionController::TestCase
 
   test "should create employee" do
     assert_difference('Employee.count') do
-      post :create, employee: { admin: @employee.admin, email: @employee.email, employed_since: @employee.employed_since, name: @employee.name, phone: @employee.phone, position: @employee.position, surname: @employee.surname }
+      post :create, employee: { email: "blah@blue.eu", name: @employee.name, nationality: @employee.nationality, newsletter: @employee.newsletter, phone: @employee.phone, salutation: @employee.salutation, surname: @employee.surname }
     end
-
-    assert_redirected_to employee_path(assigns(:employee))
+    assert_redirected_to users_path
   end
 
-  test "should show employee" do
-    get :show, id: @employee
-    assert_response :success
+  test "should not create employee, not valid" do
+    assert_no_difference('Employee.count') do
+      post :create, employee: { email: "blah@blue.eu" }
+    end
   end
 
   test "should get edit" do
@@ -35,15 +31,42 @@ class EmployeesControllerTest < ActionController::TestCase
   end
 
   test "should update employee" do
-    patch :update, id: @employee, employee: { admin: @employee.admin, email: @employee.email, employed_since: @employee.employed_since, name: @employee.name, phone: @employee.phone, position: @employee.position, surname: @employee.surname }
-    assert_redirected_to employee_path(assigns(:employee))
+    patch :update, id: @employee, employee: { email: @employee.email, name: @employee.name, nationality: @employee.nationality, newsletter: @employee.newsletter, phone: @employee.phone, salutation: @employee.salutation, surname: @employee.surname }
+    assert_redirected_to users_path
   end
 
-  test "should destroy employee" do
-    assert_difference('Employee.count', -1) do
-      delete :destroy, id: @employee
-    end
+  test "should not update employee, not valid" do
+    patch :update, id: @employee, employee: { email: nil, name: nil, nationality: @employee.nationality, newsletter: @employee.newsletter, phone: @employee.phone, salutation: @employee.salutation, surname: @employee.surname }
+    assert_response :success
+  end
 
-    assert_redirected_to employees_path
+  test "should not get new" do
+    sign_in users(:employee1)
+    get :new
+    assert_response :redirect
+    assert_equal "You are not authorized to access this page.", flash[:alert]
+  end
+
+  test "should not create employee" do
+    sign_in users(:employee1)
+    assert_no_difference('Employee.count') do
+      post :create, employee: { email: "blahi@blue.eu", name: @employee.name, nationality: @employee.nationality, newsletter: @employee.newsletter, phone: @employee.phone, salutation: @employee.salutation, surname: @employee.surname }
+    end
+    assert_response :redirect
+    assert_equal "You are not authorized to access this page.", flash[:alert]
+  end
+
+  test "should not get edit" do
+    sign_in users(:employee1)
+    get :edit, id: @employee
+    assert_response :redirect
+    assert_equal "You are not authorized to access this page.", flash[:alert]
+  end
+
+  test "should not update employee" do
+    sign_in users(:employee1)
+    patch :update, id: @employee, employee: { email: @employee.email, name: @employee.name, nationality: @employee.nationality, newsletter: @employee.newsletter, phone: @employee.phone, salutation: @employee.salutation, surname: @employee.surname }
+    assert_response :redirect
+    assert_equal "You are not authorized to access this page.", flash[:alert]
   end
 end

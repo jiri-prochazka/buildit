@@ -41,16 +41,6 @@ class EmployeesController < ApplicationController
     end
   end
 
-  # DELETE /employees/1
-  # DELETE /employees/1.json
-  def destroy
-    @employee.destroy
-    respond_to do |format|
-      format.html { redirect_to users_path, notice: 'Employee was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_employee

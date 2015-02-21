@@ -8,6 +8,6 @@ class Attachment < ActiveRecord::Base
   :size => { :in => 0..10.megabytes }
 
   def label
-  	name + " (" + file_file_name + ") "
+  	name + " (" + file_file_name + ")"
   end
 end

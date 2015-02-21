@@ -3,6 +3,9 @@ require 'test_helper'
 class RequirementsControllerTest < ActionController::TestCase
   setup do
     @requirement = requirements(:one)
+    @user = users(:admin)
+    sign_in @user
+    request.env["HTTP_REFERER"] = project_path(@requirement.project)
   end
 
   test "should get index" do
@@ -11,17 +14,50 @@ class RequirementsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:requirements)
   end
 
+  test "should not get new" do
+    get :new
+    assert_response :redirect
+    assert_equal "You are not authorized to access this page.", flash[:alert]
+  end
+
   test "should get new" do
+    sign_in users(:customer1)
     get :new
     assert_response :success
   end
 
   test "should create requirement" do
+    sign_in users(:customer1)
     assert_difference('Requirement.count') do
-      post :create, requirement: { content: @requirement.content, project_id: @requirement.project_id }
+      post :create, requirement: { content: @requirement.content}, project_id: @requirement.project.id 
     end
 
-    assert_redirected_to requirement_path(assigns(:requirement))
+    assert_redirected_to project_path(@requirement.project)
+  end
+
+  test "should not create requirement, not customer" do
+    assert_no_difference('Requirement.count') do
+      post :create, requirement: { content: @requirement.content}, project_id: @requirement.project.id 
+    end
+    assert_response :redirect
+    assert_equal "You are not authorized to access this page.", flash[:alert]
+  end
+
+  test "should not create requirement" do
+    sign_in users(:employee1)
+    assert_no_difference('Requirement.count') do
+      post :create, requirement: { content: @requirement.content}, project_id: @requirement.project.id 
+    end
+    assert_response :redirect
+    assert_equal "You are not authorized to access this page.", flash[:alert]
+  end
+
+  test "should not create requirement, not valid" do
+    sign_in users(:customer1)
+      assert_no_difference('Requirement.count') do
+      post :create, requirement: { content: nil}, project_id: @requirement.project.id 
+    end
+    assert_response :success
   end
 
   test "should show requirement" do
@@ -37,6 +73,11 @@ class RequirementsControllerTest < ActionController::TestCase
   test "should update requirement" do
     patch :update, id: @requirement, requirement: { content: @requirement.content, project_id: @requirement.project_id }
     assert_redirected_to requirement_path(assigns(:requirement))
+  end
+
+  test "should not update requirement, not valid" do
+    patch :update, id: @requirement, requirement: { content: nil, project_id: @requirement.project_id }
+    assert_response :success
   end
 
   test "should destroy requirement" do
