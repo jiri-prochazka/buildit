@@ -45,3 +45,4 @@ admin:
   email: admin@admin.com
   type: Employee
   role: admin
+  encrypted_password: $2a$10$awFajhPzWJ0SZNbzvvs23erNyoVU/RUCXzSsUmrE30M1FZUF7jEAe

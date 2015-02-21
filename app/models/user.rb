@@ -31,5 +31,5 @@ class User < ActiveRecord::Base
   	self.type = "Customer"
     self.role = "customer"
   end
-         
+   
 end
