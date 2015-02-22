@@ -2,8 +2,11 @@ require 'test_helper'
 
 class ConceptsControllerTest < ActionController::TestCase
   setup do
-    @concept = concepts(:one)
-    @user = users(:admin)
+    delete_factories
+    @concept = create(:concept_one)
+    @concept.user = create(:customer2)
+    @concept.save
+    @user = create(:employee1)
     sign_in @user
     request.env["HTTP_REFERER"] = concepts_url
   end
@@ -55,7 +58,10 @@ class ConceptsControllerTest < ActionController::TestCase
   end
 
   test "should get index with my" do
-    sign_in users(:customer1)
+    c = create(:customer1)
+    sign_in c
+    c.concepts = [create(:concept_two)]
+    c.save
     get :index
     assert_response :success
     assert_not_nil assigns(:concepts)
@@ -63,14 +69,14 @@ class ConceptsControllerTest < ActionController::TestCase
   end
 
   test "should not get edit" do
-    sign_in users(:customer1)
+    sign_in create(:customer1)
     xhr :get, :edit, id: @concept, format: :js
     assert_response :redirect
     assert_equal "You are not authorized to access this page.", flash[:alert]
   end
 
   test "should not update concept" do
-    sign_in users(:customer1)
+    sign_in create(:customer1)
     patch :update, id: @concept, concept: { description: @concept.description, end_at: @concept.end_at, name: @concept.name, price: @concept.price, start_at: @concept.start_at }
     assert_response :redirect
     assert_equal "You are not authorized to access this page.", flash[:alert]

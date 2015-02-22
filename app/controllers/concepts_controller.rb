@@ -5,7 +5,7 @@ class ConceptsController < ApplicationController
   # GET /concepts
   # GET /concepts.json
   def index
-    @concepts = @concepts.paginate(:page => params[:page]).order('id DESC')
+    @concepts = @concepts.paginate(:page => params[:page])
     @concept = Concept.new
   end
 

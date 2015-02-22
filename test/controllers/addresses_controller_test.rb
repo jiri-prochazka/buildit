@@ -2,12 +2,17 @@ require 'test_helper'
 
 class AddressesControllerTest < ActionController::TestCase
   setup do
-    @address = addresses(:one)
-    @user = users(:admin)
+    delete_factories
+    @address = create(:address_one)
+    @user = create(:admin)
+    @user.role = "admin"
+    @user.save
     sign_in @user
   end
 
   test "should get index" do
+    @address.user = create(:employee1)
+    @address.save
     get :index
     assert_response :success
     assert_not_nil assigns(:addresses)
@@ -54,7 +59,7 @@ class AddressesControllerTest < ActionController::TestCase
   end
 
   test "should not get index as manager" do
-    sign_in users(:employee1)
+    sign_in create(:employee1)
     get :index
     assert_response :redirect
     assert_equal "You are not authorized to access this page.", flash[:alert]
@@ -62,34 +67,41 @@ class AddressesControllerTest < ActionController::TestCase
   end
 
   test "should not get edit" do
-    sign_in users(:employee1)
+    sign_in create(:employee1)
     get :edit, id: @address
     assert_response :redirect
     assert_equal "You are not authorized to access this page.", flash[:alert]
   end
 
   test "should not update address" do
-    sign_in users(:employee1)
+    sign_in create(:employee1)
     patch :update, id: @address, address: { city: @address.city, country: @address.country, street: @address.street, user_id: @address.user_id, zip: @address.zip }
     assert_response :redirect
     assert_equal "You are not authorized to access this page.", flash[:alert]
   end
 
   test "should get my edit" do
-    sign_in users(:employee1)
-    get :edit, id: addresses(:two)
+    user = create(:employee1)
+    sign_in user
+    @address = create(:address_two)
+    @address.user = user
+    @address.save
+    get :edit, id: @address
     assert_response :success
   end
 
   test "should update my address" do
-    sign_in users(:employee1)
-    @address = addresses(:two)
+    user = create(:employee1)
+    sign_in user
+    @address = create(:address_two)
+    @address.user = user
+    @address.save
     patch :update, id: @address, address: { city: @address.city, country: @address.country, street: @address.street, user_id: @address.user_id, zip: @address.zip }
     assert_redirected_to edit_user_registration_path
   end
 
   test "should not destroy address" do
-    sign_in users(:employee1)
+    sign_in create(:employee1)
     assert_no_difference('Address.count') do
       delete :destroy, id: @address
     end

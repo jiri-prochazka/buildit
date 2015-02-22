@@ -1,4 +1,9 @@
-class Requirement < ActiveRecord::Base
+class Requirement
+	include Mongoid::Document
+	include Mongoid::Timestamps
+
+	field :content, type: String
+
   belongs_to :project
   belongs_to :customer
 

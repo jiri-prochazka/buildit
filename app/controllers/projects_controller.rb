@@ -5,11 +5,11 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     if params[:cat].eql?('completed')
-      @projects = @projects.where.not(completed_at: nil).paginate(:page => params[:page]).order('id DESC')
+      @projects = @projects.where(:completed_at.ne => nil).paginate(:page => params[:page])
     elsif params[:cat].eql?('archived')
-      @projects = @projects.where(archived: true).paginate(:page => params[:page]).order('id DESC')
+      @projects = @projects.where(archived: true).paginate(:page => params[:page])
     else
-      @projects = @projects.where(completed_at: nil, archived: false).paginate(:page => params[:page]).order('id DESC')
+      @projects = @projects.where(completed_at: nil, archived: false).order_by(:created_at.desc).paginate(:page => params[:page])
     end
   end
 

@@ -2,8 +2,9 @@ require 'test_helper'
 
 class AttachmentsControllerTest < ActionController::TestCase
   setup do
-    @attachment = attachments(:one)
-    @user = users(:admin)
+    delete_factories
+    @attachment = create(:attachment_one)
+    @user = create(:employee1)
     sign_in @user
   end
 

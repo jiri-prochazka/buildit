@@ -1,10 +1,13 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
+#require 'rails/all'
+require "action_controller/railtie"
+require "action_mailer/railtie"
+require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(*Rails.groups)
+Bundler.require(*Rails.groups(assets: %w(development test)))
 
 module Buildit
   class Application < Rails::Application
@@ -22,7 +25,7 @@ module Buildit
     # Heroku requirement for loading assets
     #config.serve_static_assets = true
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
+    #config.active_record.raise_in_transactional_callbacks = true
 
     WillPaginate.per_page = 6
   end

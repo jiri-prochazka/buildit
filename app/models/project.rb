@@ -1,4 +1,12 @@
-class Project < ActiveRecord::Base
+class Project
+	include Mongoid::Document
+	include Mongoid::Timestamps
+
+	field :name, type: String
+	field :estimated_finish, type: DateTime
+	field :completed_at, type: DateTime
+	field :archived, type: Boolean, default: false
+
 	has_many :jobs, dependent: :destroy
 	has_many :requirements, dependent: :destroy
 	belongs_to :concept
@@ -7,7 +15,7 @@ class Project < ActiveRecord::Base
 
 	validates :name, presence: true
 	validate :check_concept_for_project, on: :create
-	before_create :set_customer, if: Proc.new { |project| project.customer_id.nil? }
+	before_create :set_customer, if: Proc.new { |project| project.customer.nil? }
 
 	after_save :set_completed_at, if: Proc.new { |project| project.completed_at.nil? }
 
@@ -22,7 +30,7 @@ class Project < ActiveRecord::Base
 	end
 
 	def progress
-		self.jobs.average(:progress).to_i
+		self.jobs.avg(:progress).to_i
 	end
 
 	def completed?
@@ -38,7 +46,7 @@ class Project < ActiveRecord::Base
 	end
 
 	def set_completed_at
-		if self.completed?
+		if self.completed? and self.jobs.size > 0
 			self.completed_at = DateTime.now
 			self.save
 		end

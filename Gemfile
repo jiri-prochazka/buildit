@@ -4,7 +4,9 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use postgresql as the database for Active Record
-gem 'pg'
+#gem 'pg'
+
+gem 'mongoid', "~> 4.0.0"
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -13,6 +15,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+
+gem 'factory_girl_rails', group: :test
 
 #Devise gem for authentication
 gem 'devise'
@@ -24,13 +28,15 @@ gem 'country_select', github: 'stefanpenner/country_select'
 #nested forms
 gem "cocoon"
 
-gem 'will_paginate', '~> 3.0.6'
+#gem 'will_paginate', '~> 3.0.6'
 gem 'will_paginate-bootstrap'
+gem "will_paginate_mongoid"
 
 #gem 'rails_12factor', group: :production
 
 #paperclip for uploading files
-gem "paperclip", "~> 4.2"
+#gem "paperclip", "~> 4.2"
+gem "mongoid-paperclip", :require => "mongoid_paperclip"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
