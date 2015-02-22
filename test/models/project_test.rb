@@ -40,5 +40,17 @@ class ProjectTest < ActiveSupport::TestCase
   	assert !p.completed?
   end
 
+  test "set completed" do
+    p = create(:project_one)
+    p.jobs = [create(:job_one)]
+    p.save
+    assert p.completed_at.nil?
+    job = p.jobs.first
+    job.progress = 100
+    job.save
+    p.save
+    assert_not_nil p.completed_at
+  end
+
 
 end
